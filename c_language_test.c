@@ -10,10 +10,14 @@
 
 // return a pointer to the character that is at the passed position.
 // return a null if the requested position is past the end of the string.
-char *get_pointer_at_position( char *pstring, int position )
+char *get_pointer_at_position(char *pstring, int position)
 {
-	// Your code here
-	return pstring ;	// Fix this -- it is incorrect but allows the program to compile and run.
+    for (int i = 0; i <= position; i++) {
+        if (pstring[i] == '\0') {
+            return NULL;
+        }
+    }
+    return &pstring[position];
 }
 
 // Convert array of integer x values into an array of y values using y = mx + b where m and b are constants
@@ -23,8 +27,15 @@ char *get_pointer_at_position( char *pstring, int position )
 // Return 0 if the passed in px pointer is NULL.
 int convert_and_sum( int *px, int m, int b, int number_of_x_values )
 {
-	// your code here
-	return 0 ;		// Fix this -- it is incorrect but allows the program to compile and run.
+	if(px == NULL) {
+		return 0;
+	}
+	int sum = 0;
+	for(int i = 0; i < number_of_x_values; i++) {
+		px[i] = m * px[i] + b;
+		sum += px[i];
+	}
+	return 0 ;
 }
 
 // Determine if two pointers point to the same array of numbers
@@ -32,8 +43,13 @@ int convert_and_sum( int *px, int m, int b, int number_of_x_values )
 // return 0 if either pointer is NULL.
 int same_array( int *pfirst, int *psecond )
 {
-	// your code here
-	return 0 ;	// Fix this -- it is incorrect but allows the program to compile and run.
+	if(pfirst == NULL || psecond == NULL) {
+		return 0 ;
+	}
+	if(pfirst == psecond) {
+		return 1;
+	}
+	return 0;
 }
 
 // The first time this is called return 1.
@@ -41,9 +57,12 @@ int same_array( int *pfirst, int *psecond )
 // Continue this pattern returning 1, then 0, then 1 and so on.
 int bool_flip_flop()
 {
-	// your code here
-	return 0 ;	// Fix this -- it is incorrect but allows the program to compile and run.
+    static int state = 1;
+    int return_value = state;
+    state = !state;
+    return return_value;
 }
+
 
 // This function is implemented incorrectly. You need to correct it.
 // When fixed it changes the last character in the passed string to 'Z'.
@@ -51,11 +70,13 @@ int bool_flip_flop()
 // It returns 0 on if the passed string is NULL or an empty string.
 int fix_bad_code( char *pstring )
 {
-	if ( *pstring || ! pstring )
-		return 0 ; 
-	while ( *pstring = '\0' )
-		;
-	pstring = 'Z' ;
+	if (pstring == NULL || *pstring == '\0') {
+		return 0 ;
+	}
+	while (*(pstring + 1) != '\0' ) {
+		pstring++;
+	}
+	*pstring = 'Z' ;
 	return 1 ;
 }
 
